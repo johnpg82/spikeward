@@ -1,0 +1,18 @@
+// Spikeward Worker. The Deploy to Cloudflare button provisions the D1 database and
+// KV namespace below automatically; no resource IDs are needed.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "spikeward",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-15",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [{ "binding": "DB", "database_name": "spikeward","database_id": "ae2b0f72-a196-4368-b747-381727f1ad48" }],
+  "kv_namespaces": [{ "binding": "KV","id": "e5096750bc764f1f973fa8ce758d2e18" }],
+  "triggers": { "crons": ["* * * * *"] },
+  "observability": { "enabled": true }
+}

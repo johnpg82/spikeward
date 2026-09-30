@@ -1,0 +1,44 @@
+{
+  "name": "spikeward",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Open-source bot-spike mitigation on Cloudflare Workers, powered by Jev",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "deploy": "vite build && wrangler deploy",
+    "dev": "vite build && wrangler dev",
+    "dev:app": "vite",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "types": "wrangler types --include-runtime false",
+    "record": "node scripts/record-spike.mjs"
+  },
+  "dependencies": {
+    "hono": "^4.13.11",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.22.0",
+    "@cloudflare/workers-types": "^5.20260930.1",
+    "@preact/preset-vite": "^2.10.6",
+    "preact": "^10.29.8",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.0",
+    "vitest": "^4.1.0",
+    "wrangler": "^4.144.0"
+  },
+  "cloudflare": {
+    "bindings": {
+      "SPIKEWARD_SECRET": {
+        "description": "A long random string that encrypts your stored credentials and unlocks first-time setup. Generate one with `openssl rand -hex 32` and keep a copy: you'll paste it into the app once."
+      }
+    }
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true,
+    "workerd@1.20260815.1": true,
+    "workerd@1.20260926.1": true
+  }
+}

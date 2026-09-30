@@ -1,0 +1,1 @@
+SPIKEWARD_SECRET= # A long random string, e.g. from: openssl rand -hex 32
